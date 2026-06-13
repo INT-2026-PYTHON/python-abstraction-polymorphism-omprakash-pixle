@@ -81,3 +81,27 @@ Explanation:
 =================================================
 
 """
+class Animal:
+    def __init__(self,name):
+        self.name=name
+
+    def speak(self):
+        pass
+
+class Dog(Animal):
+    def speak(self):
+        return "woof"
+    
+class cat(Animal):
+    def speak(self):
+        return "Meow"
+
+class cow(Animal):
+    def speak(self):
+        return "Moo"
+
+animals=[Dog("Buddy"),
+         cat("Whiskers"),
+         cow("bessie"),]
+for Animal in animals:
+    print(f"{Animal.name} say {Animal.speak()}")
