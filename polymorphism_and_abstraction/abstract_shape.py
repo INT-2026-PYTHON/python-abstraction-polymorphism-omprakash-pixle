@@ -99,3 +99,62 @@ Explanation:
 =================================================
 
 """
+from abc import ABC,abstractmethod
+
+class shape(ABC):
+    @abstractmethod
+    def area(self):
+        pass
+    
+    @abstractmethod
+    def perimeter(self):
+        pass
+    
+    def describe(self):
+        return f"{self.__class__.__name__}->area={self.area()},perimeter={self.perimeter()}"
+    
+class circle(shape):
+    def __init__(self,radius):
+        self.radius=radius
+        
+    def area(self):
+        return 3.14*self.radius*self.radius
+    
+    def perimeter(self):
+        return 2*3.14*self.radius
+
+class rectangle(shape):
+    def __init__(self,length,width):
+        self.length=length
+        self.width=width
+    
+    def area(self):
+        return self.length*self.width
+    
+    def perimeter(self):
+        return 2*(self.length+self.width)
+    
+class triangle(shape):
+    def __init__(self,a,b,c):
+        self.a=a
+        self.b=b
+        self.c=c
+
+    def area(self):
+        s=(self.a+self.b+self.c)
+        return (s*(s-self.a)*(s-self.b)*(s-self.c))**0.5
+    
+    def perimeter(self):
+        return self.a+self.b+self.c
+    
+
+try:
+    shape()
+except TypeError as e:
+    print("cannot create shape directly")
+    print("typeError:",e)
+
+shapes=[circle(5),rectangle(4,6),triangle(3,4,5)]
+print()
+for shape in shapes:
+    print(shape.describe())

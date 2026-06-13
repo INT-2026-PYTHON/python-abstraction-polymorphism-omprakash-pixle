@@ -59,3 +59,42 @@ Explanation:
 =================================================
 
 """
+from abc import ABC,abstractmethod
+
+class pymentmethod(ABC):
+    
+    @abstractmethod
+    def pay(self,amount):
+        pass
+    
+class creditcard(pymentmethod):
+    def __init__(self,name,card_number):
+        self.name=name
+        self.card_number=card_number
+
+    def pay(self,amount):
+        print(f"[creditcard]{self.name} paid{amount}via card{self.card_number}")
+
+class UPI(pymentmethod):
+    def __init__(self,upi_id):
+        self.upi_id=upi_id
+
+    def pay(self,amount):
+        print(f"[UPI]{self.upi_id} paid {amount}")
+
+class cash(pymentmethod):
+    def __init__(self,name):
+        self.name=name
+
+    def pay(self,amount):
+        print(f"[cash]{self.name} paid {amount} in cash")
+
+def checkout(method,amount):
+        method.pay(amount)
+
+methods=[creditcard("Alice","4111-1111-1111-1111"),
+         UPI("bob@upi"),
+         cash("carol")]
+
+for m in methods:
+    checkout(m,500) 
